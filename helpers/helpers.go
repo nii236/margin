@@ -39,6 +39,131 @@ var CurrentFields = []*Mapping{
 	&Mapping{Key: "LASTMARKET", Value: 0x40000},
 }
 
+func MergeCurrent(prev, curr *models.CurrentMessage) *models.CurrentMessage {
+	next := &models.CurrentMessage{}
+	if curr.TYPE == "" {
+		next.TYPE = prev.TYPE
+	} else {
+		next.TYPE = curr.TYPE
+	}
+	if curr.MARKET == "" {
+		next.MARKET = prev.MARKET
+	} else {
+		next.MARKET = curr.MARKET
+	}
+	if curr.FROMSYMBOL == "" {
+		next.FROMSYMBOL = prev.FROMSYMBOL
+	} else {
+		next.FROMSYMBOL = curr.FROMSYMBOL
+	}
+	if curr.TOSYMBOL == "" {
+		next.TOSYMBOL = prev.TOSYMBOL
+	} else {
+		next.TOSYMBOL = curr.TOSYMBOL
+	}
+	if curr.FLAGS == "" {
+		next.FLAGS = prev.FLAGS
+	} else {
+		next.FLAGS = curr.FLAGS
+	}
+	if curr.PRICE == "" {
+		next.PRICE = prev.PRICE
+	} else {
+		next.PRICE = curr.PRICE
+	}
+	if curr.BID == "" {
+		next.BID = prev.BID
+	} else {
+		next.BID = curr.BID
+	}
+	if curr.OFFER == "" {
+		next.OFFER = prev.OFFER
+	} else {
+		next.OFFER = curr.OFFER
+	}
+	if curr.LASTUPDATE == "" {
+		next.LASTUPDATE = prev.LASTUPDATE
+	} else {
+		next.LASTUPDATE = curr.LASTUPDATE
+	}
+	if curr.AVG == "" {
+		next.AVG = prev.AVG
+	} else {
+		next.AVG = curr.AVG
+	}
+	if curr.LASTVOLUME == "" {
+		next.LASTVOLUME = prev.LASTVOLUME
+	} else {
+		next.LASTVOLUME = curr.LASTVOLUME
+	}
+	if curr.LASTVOLUMETO == "" {
+		next.LASTVOLUMETO = prev.LASTVOLUMETO
+	} else {
+		next.LASTVOLUMETO = curr.LASTVOLUMETO
+	}
+	if curr.LASTTRADEID == "" {
+		next.LASTTRADEID = prev.LASTTRADEID
+	} else {
+		next.LASTTRADEID = curr.LASTTRADEID
+	}
+	if curr.VOLUMEHOUR == "" {
+		next.VOLUMEHOUR = prev.VOLUMEHOUR
+	} else {
+		next.VOLUMEHOUR = curr.VOLUMEHOUR
+	}
+	if curr.VOLUMEHOURTO == "" {
+		next.VOLUMEHOURTO = prev.VOLUMEHOURTO
+	} else {
+		next.VOLUMEHOURTO = curr.VOLUMEHOURTO
+	}
+	if curr.VOLUME24HOUR == "" {
+		next.VOLUME24HOUR = prev.VOLUME24HOUR
+	} else {
+		next.VOLUME24HOUR = curr.VOLUME24HOUR
+	}
+	if curr.VOLUME24HOURTO == "" {
+		next.VOLUME24HOURTO = prev.VOLUME24HOURTO
+	} else {
+		next.VOLUME24HOURTO = curr.VOLUME24HOURTO
+	}
+	if curr.OPENHOUR == "" {
+		next.OPENHOUR = prev.OPENHOUR
+	} else {
+		next.OPENHOUR = curr.OPENHOUR
+	}
+	if curr.HIGHHOUR == "" {
+		next.HIGHHOUR = prev.HIGHHOUR
+	} else {
+		next.HIGHHOUR = curr.HIGHHOUR
+	}
+	if curr.LOWHOUR == "" {
+		next.LOWHOUR = prev.LOWHOUR
+	} else {
+		next.LOWHOUR = curr.LOWHOUR
+	}
+	if curr.OPEN24HOUR == "" {
+		next.OPEN24HOUR = prev.OPEN24HOUR
+	} else {
+		next.OPEN24HOUR = curr.OPEN24HOUR
+	}
+	if curr.HIGH24HOUR == "" {
+		next.HIGH24HOUR = prev.HIGH24HOUR
+	} else {
+		next.HIGH24HOUR = curr.HIGH24HOUR
+	}
+	if curr.LOW24HOUR == "" {
+		next.LOW24HOUR = prev.LOW24HOUR
+	} else {
+		next.LOW24HOUR = curr.LOW24HOUR
+	}
+	if curr.LASTMARKET == "" {
+		next.LASTMARKET = prev.LASTMARKET
+	} else {
+		next.LASTMARKET = curr.LASTMARKET
+	}
+	return next
+}
+
 func UnpackCurrent(msg string) (*models.CurrentMessage, error) {
 	valuesArray := strings.Split(msg, "~")
 	maskHex := valuesArray[len(valuesArray)-1]
