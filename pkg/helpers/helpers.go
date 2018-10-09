@@ -4,7 +4,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/nii236/margin/models"
+	"github.com/nii236/margin/pkg/models"
 )
 
 type Mapping struct {

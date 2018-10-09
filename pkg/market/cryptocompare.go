@@ -1,6 +1,7 @@
-package main
+package market
 
 import (
+	"context"
 	"encoding/csv"
 	"encoding/json"
 	"errors"
@@ -14,13 +15,19 @@ import (
 
 	"github.com/graarh/golang-socketio"
 	"github.com/graarh/golang-socketio/transport"
-	"github.com/nii236/margin/helpers"
-	"github.com/nii236/margin/models"
+	"github.com/nii236/margin/pkg/helpers"
+	"github.com/nii236/margin/pkg/models"
 )
 
-func main() {
+type Service struct {
+}
+
+func New() *Service {
+	return &Service{}
+}
+
+func (s *Service) Run(ctx context.Context) {
 	//connect to server, you can use your own transport settings
-	fmt.Println("Dialling...")
 	c, err := gosocketio.Dial(
 		gosocketio.GetUrl("streamer.cryptocompare.com", 443, true),
 		transport.GetDefaultWebsocketTransport(),
@@ -32,18 +39,18 @@ func main() {
 
 	defer c.Close()
 
-	btcusdSubscription, err := subtrades("BTC", "USD")
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
+	// btcusdSubscription, err := subtrades("BTC", "USD")
+	// if err != nil {
+	// 	fmt.Println(err)
+	// 	return
+	// }
 	// ethbtcSubscription, err := subtrades("ETH", "USD")
 	// if err != nil {
 	// 	fmt.Println(err)
 	// 	return
 	// }
 
-	err = c.Emit("SubAdd", map[string][]string{"subs": btcusdSubscription})
+	err = c.Emit("SubAdd", map[string][]string{"subs": []string{"2~Bitstamp~BTC~USD"}})
 	if err != nil {
 		fmt.Println(err)
 		return
@@ -199,7 +206,7 @@ func (ctrl *Controller) HandleMessage(c *gosocketio.Channel, msg interface{}) st
 				fmt.Println(err)
 				return "Error"
 			}
-			fmt.Println("Appended CSV line")
+			// fmt.Println("Appended CSV line")
 			defer w.Flush()
 		}
 		return "OK"

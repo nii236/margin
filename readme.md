@@ -1,4 +1,4 @@
-`go run main.go`
+`go run cmd/server/main.go`
 
 ```
 1538669943856108663,Bitfinex,BTC,USD,6594.9
